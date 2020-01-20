@@ -3,28 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2096BEF823D62CF400C2C0D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096BEF723D62CF400C2C0D9 /* AppDelegate.swift */; };
-		2096BEFA23D62CF400C2C0D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096BEF923D62CF400C2C0D9 /* SceneDelegate.swift */; };
 		2096BEFC23D62CF400C2C0D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096BEFB23D62CF400C2C0D9 /* ViewController.swift */; };
-		2096BEFF23D62CF400C2C0D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2096BEFD23D62CF400C2C0D9 /* Main.storyboard */; };
 		2096BF0123D62CFB00C2C0D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2096BF0023D62CFB00C2C0D9 /* Assets.xcassets */; };
 		2096BF0423D62CFB00C2C0D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2096BF0223D62CFB00C2C0D9 /* LaunchScreen.storyboard */; };
+		2096BF0E23D6319F00C2C0D9 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096BF0D23D6319F00C2C0D9 /* UserCell.swift */; };
+		2096BF1023D631AC00C2C0D9 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096BF0F23D631AC00C2C0D9 /* LoadingCell.swift */; };
+		2096BF1323D631FD00C2C0D9 /* SearchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096BF1223D631FD00C2C0D9 /* SearchUser.swift */; };
+		2096BF1523D6323500C2C0D9 /* SingleUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096BF1423D6323500C2C0D9 /* SingleUser.swift */; };
 		3B1C27EE9C0D106A4728988B /* Pods_GithubSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA6DF5482B1D32F9A84A9F7 /* Pods_GithubSearch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2096BEF423D62CF400C2C0D9 /* GithubSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2096BEF723D62CF400C2C0D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2096BEF923D62CF400C2C0D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2096BEFB23D62CF400C2C0D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2096BEFE23D62CF400C2C0D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2096BF0023D62CFB00C2C0D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2096BF0323D62CFB00C2C0D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2096BF0523D62CFB00C2C0D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2096BF0D23D6319F00C2C0D9 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		2096BF0F23D631AC00C2C0D9 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		2096BF1223D631FD00C2C0D9 /* SearchUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUser.swift; sourceTree = "<group>"; };
+		2096BF1423D6323500C2C0D9 /* SingleUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleUser.swift; sourceTree = "<group>"; };
 		8FA6DF5482B1D32F9A84A9F7 /* Pods_GithubSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GithubSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C2AE8A4C0197343B4524674 /* Pods-GithubSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSearch.release.xcconfig"; path = "Target Support Files/Pods-GithubSearch/Pods-GithubSearch.release.xcconfig"; sourceTree = "<group>"; };
 		A4736450BA88F46240DE2BE5 /* Pods-GithubSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSearch.debug.xcconfig"; path = "Target Support Files/Pods-GithubSearch/Pods-GithubSearch.debug.xcconfig"; sourceTree = "<group>"; };
@@ -48,7 +52,6 @@
 				A4736450BA88F46240DE2BE5 /* Pods-GithubSearch.debug.xcconfig */,
 				9C2AE8A4C0197343B4524674 /* Pods-GithubSearch.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -74,14 +77,48 @@
 			isa = PBXGroup;
 			children = (
 				2096BEF723D62CF400C2C0D9 /* AppDelegate.swift */,
-				2096BEF923D62CF400C2C0D9 /* SceneDelegate.swift */,
-				2096BEFB23D62CF400C2C0D9 /* ViewController.swift */,
-				2096BEFD23D62CF400C2C0D9 /* Main.storyboard */,
+				2096BF0C23D62FC100C2C0D9 /* controllers */,
+				2096BF1123D631EE00C2C0D9 /* views */,
+				2096BF1623D6323A00C2C0D9 /* models */,
+				2096BF0B23D62F5400C2C0D9 /* supportingFiles */,
+			);
+			path = GithubSearch;
+			sourceTree = "<group>";
+		};
+		2096BF0B23D62F5400C2C0D9 /* supportingFiles */ = {
+			isa = PBXGroup;
+			children = (
 				2096BF0023D62CFB00C2C0D9 /* Assets.xcassets */,
 				2096BF0223D62CFB00C2C0D9 /* LaunchScreen.storyboard */,
 				2096BF0523D62CFB00C2C0D9 /* Info.plist */,
 			);
-			path = GithubSearch;
+			path = supportingFiles;
+			sourceTree = "<group>";
+		};
+		2096BF0C23D62FC100C2C0D9 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2096BEFB23D62CF400C2C0D9 /* ViewController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		2096BF1123D631EE00C2C0D9 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				2096BF0D23D6319F00C2C0D9 /* UserCell.swift */,
+				2096BF0F23D631AC00C2C0D9 /* LoadingCell.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		2096BF1623D6323A00C2C0D9 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				2096BF1223D631FD00C2C0D9 /* SearchUser.swift */,
+				2096BF1423D6323500C2C0D9 /* SingleUser.swift */,
+			);
+			path = models;
 			sourceTree = "<group>";
 		};
 		61303E782E636DD1FE37F347 /* Frameworks */ = {
@@ -154,7 +191,6 @@
 			files = (
 				2096BF0423D62CFB00C2C0D9 /* LaunchScreen.storyboard in Resources */,
 				2096BF0123D62CFB00C2C0D9 /* Assets.xcassets in Resources */,
-				2096BEFF23D62CF400C2C0D9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,21 +245,16 @@
 			files = (
 				2096BEFC23D62CF400C2C0D9 /* ViewController.swift in Sources */,
 				2096BEF823D62CF400C2C0D9 /* AppDelegate.swift in Sources */,
-				2096BEFA23D62CF400C2C0D9 /* SceneDelegate.swift in Sources */,
+				2096BF1523D6323500C2C0D9 /* SingleUser.swift in Sources */,
+				2096BF1023D631AC00C2C0D9 /* LoadingCell.swift in Sources */,
+				2096BF1323D631FD00C2C0D9 /* SearchUser.swift in Sources */,
+				2096BF0E23D6319F00C2C0D9 /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2096BEFD23D62CF400C2C0D9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2096BEFE23D62CF400C2C0D9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2096BF0223D62CFB00C2C0D9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -356,7 +387,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HBXK2UB5Z3;
-				INFOPLIST_FILE = GithubSearch/Info.plist;
+				INFOPLIST_FILE = GithubSearch/supportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -375,7 +406,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HBXK2UB5Z3;
-				INFOPLIST_FILE = GithubSearch/Info.plist;
+				INFOPLIST_FILE = GithubSearch/supportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
