@@ -10,9 +10,5 @@ target 'GithubSearch' do
   pod 'Kingfisher'
   pod 'SwiftyJSON'
   pod 'Alamofire'
-  pod 'RxAlamofire'
   pod 'Then'
-  pod 'RxSwift'
-  pod 'RxCocoa'
-  pod 'RxDataSources'
 end
