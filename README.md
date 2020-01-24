@@ -1,7 +1,7 @@
 # GithubSearch-kimjongchan
 
-![githubapi1](https://user-images.githubusercontent.com/34432988/72686043-b8eafc00-3b33-11ea-815c-a340c2116349.gif)
-![githubapi2](https://user-images.githubusercontent.com/34432988/72686044-b9839280-3b33-11ea-9d67-dcee6763640b.gif)
+![Jan-24-2020 13-19-52](https://user-images.githubusercontent.com/34432988/73044305-69e2f500-3eac-11ea-92d9-50683ec46664.gif)
+![Jan-24-2020 13-19-26](https://user-images.githubusercontent.com/34432988/73044306-69e2f500-3eac-11ea-992c-8f96563baeea.gif)
 
 - 소개: GithubAPI를 이용해서 전체 유저와 각 개인이 가진 레포지토리 권한을 보여주는 앱 입니다. 
 스토리보드와 xib를 사용하지 않고 snapkit과 코드로만 작성되었습니다. 
