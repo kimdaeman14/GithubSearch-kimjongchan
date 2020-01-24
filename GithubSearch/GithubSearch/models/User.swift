@@ -8,14 +8,8 @@
 
 import Foundation
 
+
 struct User {
-    var profileImageURL:String?
-    var userID:Int?
-    var userName:String?
-}
-
-
-struct newUser {
     var profileImageURL:String?
     var reposNumber:Int?
     var userName:String?

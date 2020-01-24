@@ -15,33 +15,28 @@ class ViewController: UIViewController {
         $0.separatorStyle = .none
     }
     
-    private var users: [User] = []
-    
-    
-    private var newUsers: [newUser] = []
-    
-    
-    private var fetchingMore = false
-    
-    private var lastID = 0
-    
     private let searchBar = UISearchBar().then {
         $0.placeholder = "Please enter text..."
     }
-    private let debouncer = Debouncer(timeInterval: 0.5)
-
     
+    private var users: [User] = []
+    
+    private var totalUsers:JSON = JSON(arrayLiteral: "")
+    
+    private var fetchingMore = false
+    
+    private let debouncer = Debouncer(timeInterval: 0.5)
+    
+    private let numberOfDataShowing = 20
+    
+    private var numberOfPageRequest = 1
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initUI()
         self.initTableView()
-//        self.initData()
-        
-        
-        searchBar.delegate = self
-        
+        self.initSearchBar()
     }
     
 }
@@ -49,128 +44,76 @@ class ViewController: UIViewController {
 
 extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-
         debouncer.renewInterval()
-
-        
-               debouncer.handler = {
-                   // Send the debounced network request here
-                   print("Send network request")
-                
-                API.searchUsers(searchText, 1).responseData { (response) in
-                    switch response.result{
-                    case .success(let data):
-                        do{
-                            let json = try JSON(data: data)
-                            
-                            guard let arr = json["items"].array else {return}
-                            
-                            
-                            _ = arr.map { json in
-                                let userName = json["login"].string ?? ""
-                                let profileURL = json["avatar_url"].string ?? ""
-                                
-                                API.detailUserInfos(userName).responseData { (response) in
-                                    switch response.result{
-                                    case .success(let data):
-                                        do{
-                                            let json = try JSON(data: data)
-                                                let reposNumber = json["public_repos"].int ?? 0
-                                                self.newUsers.append(newUser(profileImageURL: profileURL,
-                                                                        reposNumber: reposNumber,
-                                                                        userName: userName))
-                                                self.tableView.reloadData()
-                                                self.fetchingMore = false
-
-                                        }catch{
-                                            print(error.localizedDescription)
-                                            
-                                        }
-                                        
-                                    case .failure(let error):
-                                        print(error.localizedDescription)
-                                    }
-                                    
-                                }
-                                
-                                
-                            }
-                        }catch{
-                            print(error.localizedDescription)
-                        }
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                        
-                    }
-                }
-                
-                
-               }
-
-               func textDidChangeDelegateMethod() {
-                   // When the user performs a repeating action, such as entering text, invoke the `renewInterval` method
-               }
-        
-
-        
-        self.newUsers = []
-
-        
-        
-
+        debouncer.handler = {
+            self.requestSearch(searchText)
+        }
+        self.users = []
+        self.numberOfPageRequest = 1
     }
 }
 
 
 extension ViewController {
     
-    
-    private func initData(){
-        
-       
-        
-        
-        
-//
-//        let debouncedFunction = Debouncer(delay: 0.50) {
-//            print("delayed printing")
-//
-//
-//            API.allUsers(self.lastID).responseData { response in
-//                switch response.result{
-//                case .success(let data):
-//                    do{
-//                        let json = try JSON(data: data)
-//                        _ = json.map { str, json in
-//                            self.users.append(User(profileImageURL: json["avatar_url"].string,
-//                                                   userID: json["id"].int,
-//                                                   userName: json["login"].string))
-//                            self.lastID = json["id"].int ?? 0
-//                            self.tableView.reloadData()
-//                            self.fetchingMore = false
-//                        }
-//                    }catch{
-//                        print(error.localizedDescription)
-//                    }
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                }
-//            }
-//        }
-        
-        
+    private func requestSearch(_ searchText:String){
+        API.searchUsers(searchText, numberOfPageRequest).responseData { (response) in
+            switch response.result{
+            case .success(let data):
+                do{
+                    let json = try JSON(data: data)
+                    guard let arr = json["items"].array else {return}
+                    _ = arr.map { json in
+                        
+                        let userName = json["login"].string ?? ""
+                        let profileURL = json["avatar_url"].string ?? ""
+                        
+                        API.detailUserInfos(userName).responseData { (response) in
+                            switch response.result{
+                            case .success(let data):
+                                do{
+                                    let json = try JSON(data: data)
+                                    let reposNumber = json["public_repos"].int ?? 0
+                                    
+                                    if(self.users.count < self.numberOfDataShowing){
+                                        self.users.append(User(profileImageURL: profileURL,
+                                                               reposNumber: reposNumber,
+                                                               userName: userName))
+                                        self.tableView.reloadData()
+                                        self.fetchingMore = false
+                                    }else{
+                                        self.users.append(User(profileImageURL: profileURL,
+                                                               reposNumber: reposNumber,
+                                                               userName: userName))
+                                        //                                        self.tableView.reloadData()
+                                        self.fetchingMore = false
+                                    }
+                                }catch{
+                                    print(error.localizedDescription)
+                                }
+                            case .failure(let error):
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                }catch{
+                    print(error.localizedDescription)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                
+            }
+        }
     }
+    
 }
 
 extension ViewController {
     
     private func initUI(){
         //        self.navigationController?.isNavigationBarHidden = true
-        
         [tableView, searchBar].forEach { self.view.addSubview($0) }
         title = "GithubSearch"
-        
         view.setNeedsUpdateConstraints()
     }
     
@@ -195,37 +138,68 @@ extension ViewController {
     private func initTableView(){
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableView.rowHeight = 110
+        //        self.tableView.rowHeight = 110
         self.tableView.register(UserCell.self, forCellReuseIdentifier: UserCell.reuseIdentifier)
+        self.tableView.register(LoadingCell.self, forCellReuseIdentifier: LoadingCell.reuseIdentifier)
+        
     }
     
-    
-    
- 
+    private func initSearchBar(){
+        self.searchBar.delegate = self
+    }
 }
+
+
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newUsers.count
+        //        return users.count
+        
+        if section == 0 {
+            return users.count
+        }else if section == 1 && fetchingMore {
+            return 1
+        }
+        return 0
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.reuseIdentifier, for: indexPath) as! UserCell
-        cell.bind(model: self.newUsers[indexPath.row])
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.reuseIdentifier, for: indexPath) as! UserCell
+            guard self.users.count != 0 else {return cell}
+            cell.bind(model: self.users[indexPath.row])
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: LoadingCell.reuseIdentifier, for: indexPath) as! LoadingCell
+            if(self.users.count == 0){
+                cell.indicatorView.isHidden = true
+            }else{
+                cell.indicatorView.startAnimating()
+            }
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "data count : \(newUsers.count)..."
+        if section == 0 {
+            return "data count : \(users.count)..."
+        }else{
+            return ""
+        }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        tableView.deselectRow(at: indexPath, animated: true)
-        //        let vc = DetailViewController()
-        //        vc.selectedUserName = users[indexPath.row].userName
-        //        navigationController?.pushViewController(vc, animated: true)
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 110
+        }else{
+            return 80
+        }
+    }
 }
 
 extension ViewController {
@@ -241,10 +215,12 @@ extension ViewController {
     
     private func beginBatchFetch() {
         fetchingMore = true
-        tableView.reloadSections(IndexSet(integer: 0), with: .bottom)
-        DispatchQueue.main.async {
-            self.initData()
-        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            self.numberOfPageRequest += 1
+            self.requestSearch(self.searchBar.text ?? "")
+            self.tableView.reloadData()
+            self.fetchingMore = false
+        })
     }
     
 }

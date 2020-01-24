@@ -41,7 +41,7 @@ class UserCell: UITableViewCell {
         setupUI()
     }
     
-    func bind(model:newUser){
+    func bind(model:User){
         self.userProfileImage.kf.setImage(with: URL(string: model.profileImageURL ?? ""))
         self.reposNumber.text = "Number of repos : \(model.reposNumber ?? 0)"
         self.userName.text = model.userName
@@ -52,21 +52,9 @@ class UserCell: UITableViewCell {
 extension UserCell {
     func setupUI(){
 
-        
-        
         self.addSubview(self.baseView)
         [userProfileImage, reposNumber, userName].forEach { self.baseView.addSubview($0) }
-
-//        self.baseView.addSubview(userProfileImage)
-////        self.baseView.addSubview(userID)
-//        self.baseView.addSubview(reposNumber)
-//
-//        self.baseView.addSubview(userName)
-        
-//        userProfileImage.backgroundColor = .orange
-//        userName.backgroundColor = .yellow
-//        userID.backgroundColor = .red
-        
+    
         baseView.snp.makeConstraints { make in
             make.top.equalTo(5)
             make.left.equalTo(10)

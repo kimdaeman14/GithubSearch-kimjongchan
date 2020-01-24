@@ -7,18 +7,35 @@
 //
 
 import UIKit
+import Then
 
 class LoadingCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    static let reuseIdentifier = "LoadingCell"
+    
+    let indicatorView = UIActivityIndicatorView().then {
+        $0.color = .gray
+        $0.style = .large
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
     }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupUI()
+    }
+}
 
+
+extension LoadingCell {
+    func setupUI(){
+        self.addSubview(self.indicatorView)
+        indicatorView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+    }
 }
